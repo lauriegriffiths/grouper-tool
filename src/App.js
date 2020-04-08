@@ -11,9 +11,10 @@ import {
   Heading,
   NumberInput,
   Textarea,
+  Badge,
   Button
 } from "@chakra-ui/core";
-import { shuffle, chunk } from "lodash";
+import { shuffle, chunk, trimEnd } from "lodash";
 
 import { Groups } from "./groups";
 
@@ -26,7 +27,7 @@ class App extends React.Component {
     console.log(random_list);
   };
   generateByNumber = () => {
-    const list_of_names = this.state.textArea.split(/\r?\n/);
+    const list_of_names = trimEnd(this.state.textArea).split(/\r?\n/);
     const random_list = shuffle(list_of_names);
     const number_of_groups = this.state.numberOfGroups;
     const number_of_names = list_of_names.length;
@@ -41,7 +42,13 @@ class App extends React.Component {
   };
 
   handleTextAreaChange = event => {
-    this.setState({ textArea: event.target.value });
+    const name_list = trimEnd(event.target.value).split(/\r?\n/)
+
+    if(name_list){
+      const name_count = name_list.length
+      this.setState({nameCount:name_count})
+    }
+    this.setState({ textArea: trimEnd(event.target.value)});
   };
 
   handleGroupSizeChange = value => {
@@ -53,7 +60,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { studentlist: [], groups: [["alice", "bob"]] };
+    this.state = { studentlist: [], groups: [["alice", "bob"]],nameCount:0 };
   }
 
   render() {
@@ -114,6 +121,9 @@ class App extends React.Component {
               <Stack shouldWrapChildren spacing={4} ml={4} mt={4}>
                 <Stack shouldWrapChildren spacing={2}>
                   <Text>Person list</Text>
+                  <Badge fontSize="1.2em" variantColor="teal" mr={2} rounded="lg" pl={2} pr={2}>
+                    {this.state.nameCount}
+                  </Badge>
                   <Textarea onChange={this.handleTextAreaChange} />
                 </Stack>
                 <Stack shouldWrapChildren spacing={2}>
@@ -155,7 +165,13 @@ class App extends React.Component {
                   Groups
                 </Heading>
               </Flex>
-              <Grid templateColumns="repeat(2, 1fr)" shouldWrapChildren spacing={4} ml={4} mt={4}>
+              <Grid
+                templateColumns="repeat(2, 1fr)"
+                shouldWrapChildren
+                spacing={4}
+                ml={4}
+                mt={4}
+              >
                 <Groups groups={this.state.groups} />
               </Grid>
             </Box>
