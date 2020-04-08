@@ -155,9 +155,9 @@ class App extends React.Component {
                   Groups
                 </Heading>
               </Flex>
-              <Stack shouldWrapChildren spacing={4} ml={4} mt={4}>
+              <Grid templateColumns="repeat(2, 1fr)" shouldWrapChildren spacing={4} ml={4} mt={4}>
                 <Groups groups={this.state.groups} />
-              </Stack>
+              </Grid>
             </Box>
           </Box>
         </Grid>
