@@ -166,7 +166,7 @@ class App extends React.Component {
                 </Heading>
               </Flex>
               <Grid
-                templateColumns="repeat(2, 1fr)"
+                templateColumns="repeat(3, 1fr)"
                 shouldWrapChildren
                 spacing={4}
                 ml={4}
