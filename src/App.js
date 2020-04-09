@@ -42,13 +42,13 @@ class App extends React.Component {
   };
 
   handleTextAreaChange = event => {
-    const name_list = trimEnd(event.target.value).split(/\r?\n/)
+    const name_list = trimEnd(event.target.value).split(/\r?\n/);
 
-    if(name_list){
-      const name_count = name_list.length
-      this.setState({nameCount:name_count})
+    if (name_list) {
+      const name_count = name_list.length;
+      this.setState({ nameCount: name_count });
     }
-    this.setState({ textArea: trimEnd(event.target.value)});
+    this.setState({ textArea: trimEnd(event.target.value) });
   };
 
   handleGroupSizeChange = value => {
@@ -60,7 +60,11 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { studentlist: [], groups: [["alice", "bob"]],nameCount:0 };
+    this.state = {
+      studentlist: ["Alice", "Bob"],
+      groups: [["Alice", "Bob"]],
+      nameCount: 2
+    };
   }
 
   render() {
@@ -121,10 +125,19 @@ class App extends React.Component {
               <Stack shouldWrapChildren spacing={4} ml={4} mt={4}>
                 <Stack shouldWrapChildren spacing={2}>
                   <Text>Person list</Text>
-                  <Badge fontSize="1.2em" variantColor="teal" mr={2} rounded="lg" pl={2} pr={2}>
+                  <Badge
+                    fontSize="1.2em"
+                    variantColor="teal"
+                    mr={2}
+                    rounded="lg"
+                    pl={2}
+                    pr={2}
+                  >
                     {this.state.nameCount}
                   </Badge>
-                  <Textarea onChange={this.handleTextAreaChange} />
+                  <Textarea onChange={this.handleTextAreaChange}>
+                    {"Alice \nBob"}
+                  </Textarea>
                 </Stack>
                 <Stack shouldWrapChildren spacing={2}>
                   <Text>Group size</Text>
