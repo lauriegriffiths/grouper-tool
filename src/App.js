@@ -63,6 +63,7 @@ class App extends React.Component {
     this.state = {
       studentlist: ["Alice", "Bob"],
       groups: [["Alice", "Bob"]],
+      textArea: "Alice \n Bob",
       nameCount: 2
     };
   }
@@ -135,9 +136,10 @@ class App extends React.Component {
                   >
                     {this.state.nameCount}
                   </Badge>
-                  <Textarea onChange={this.handleTextAreaChange}>
-                    {"Alice \nBob"}
-                  </Textarea>
+                  <Textarea
+                    defaultValue={"Alice \nBob"}
+                    onChange={this.handleTextAreaChange}
+                  />
                 </Stack>
                 <Stack shouldWrapChildren spacing={2}>
                   <Text>Group size</Text>
